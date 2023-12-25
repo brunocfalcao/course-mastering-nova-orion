@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Artisan;
 
-class CourseInitialDataImport extends Migration
+class MasteringNovaInitialDataImport extends Migration
 {
     public function up()
     {

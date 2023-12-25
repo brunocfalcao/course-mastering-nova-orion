@@ -2,13 +2,10 @@
 
 namespace MasteringNovaOrion\Database\Seeders;
 
-use Eduka\Cube\Models\Chapter;
 use Eduka\Cube\Models\Course;
 use Eduka\Cube\Models\Domain;
-use Eduka\Cube\Models\Order;
 use Eduka\Cube\Models\User;
 use Eduka\Cube\Models\Variant;
-use Eduka\Cube\Models\Video;
 use Illuminate\Database\Seeder;
 
 class MasteringNovaOrionCourseSeeder extends Seeder
