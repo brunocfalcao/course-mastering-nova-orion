@@ -40,5 +40,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             'email' => env('MN_OR_EMAIL'),
             'password' => bcrypt('password'),
         ]);
+
+        $admin->variants()->attach($variant->id);
     }
 }
