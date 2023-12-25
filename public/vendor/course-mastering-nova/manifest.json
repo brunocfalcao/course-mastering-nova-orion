@@ -1,0 +1,32 @@
+{
+  "resources/assets/images/mastering-nova-mascot.svg": {
+    "file": "assets/mastering-nova-mascot-1f5b0ab7.svg",
+    "src": "resources/assets/images/mastering-nova-mascot.svg"
+  },
+  "resources/assets/images/prelaunched-bg.png": {
+    "file": "assets/prelaunched-bg-423bc383.png",
+    "src": "resources/assets/images/prelaunched-bg.png"
+  },
+  "resources/assets/images/prelaunched-image.png": {
+    "file": "assets/prelaunched-image-93a95bd7.png",
+    "src": "resources/assets/images/prelaunched-image.png"
+  },
+  "resources/assets/images/prelaunched-projects-01.svg": {
+    "file": "assets/prelaunched-projects-01-c4753032.svg",
+    "src": "resources/assets/images/prelaunched-projects-01.svg"
+  },
+  "resources/assets/images/prelaunched-projects-02.svg": {
+    "file": "assets/prelaunched-projects-02-5383a8f6.svg",
+    "src": "resources/assets/images/prelaunched-projects-02.svg"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-f0edfbbc.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-4ed993c7.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}
