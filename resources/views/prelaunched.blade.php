@@ -35,7 +35,7 @@
         <div class="p-6 rounded-lg bg-gray-800 bg-opacity-80">
 
             @if(session('message') !== null)
-                {{ Nereus::trans(session('message')) }}
+                {{ session('message') }}
             @else
             <p class="text-center text-lg mb-4">Subscribe for Early Access</p>
             <form method="POST" target="_self" action="{{ route('prelaunched.subscribe') }}">
