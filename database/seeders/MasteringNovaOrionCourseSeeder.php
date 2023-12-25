@@ -18,6 +18,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             'admin_name' => 'Bruno Falcao',
             'admin_email' => env('MN_OR_EMAIL'),
             'twitter_handle' => env('MN_OR_TWITTER'),
+            'launched_at' => now()->subHours(6),
             'provider_namespace' => 'MasteringNovaOrion\\MasteringNovaOrionServiceProvider',
             'lemon_squeezy_store_id' => env('LEMON_SQUEEZY_STORE_ID'),
         ]);
