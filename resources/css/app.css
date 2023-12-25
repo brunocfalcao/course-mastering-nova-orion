@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @resources/assets */
+@layer utilities {
+  .border-gradient {
+    border-width: 1px;
+    border-style: solid;
+    border-image: linear-gradient(135deg, #00ffc4 0%, #56d7fe 100%);
+    border-image-slice: 1;
+  }
+}
+
+/* In your CSS or in your Tailwind CSS configuration */
+@layer utilities {
+  .text-gradient {
+    position: relative;
+    background: linear-gradient(135deg, #00ffc4 0%, #56d7fe 100%);
+    background-clip: text;
+    -webkit-background-clip: text; /* For Safari */
+    color: transparent;
+    display: inline-block;
+  }
+}
+/* @end-course-mastering-nova-orion */
