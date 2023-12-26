@@ -33,11 +33,7 @@
         <h1 class="text-4xl font-bold mb-6">{{ Nereus::course()->name }}</h1>
 
         <div class="p-6 rounded-lg bg-gray-800 bg-opacity-80">
-            @isset($message)
-                <span class='text-red-500'>{{ Nereus::trans($message) }}</span>
-            @else
-            <p class="text-center text-lg mb-4">{{ Nereus::trans('thank-you-for-buying') }}</p>
-            @endisset
+            <p class="text-center text-lg mb-4">Thanks for buying {{ Nereus::course()->name }}! I have sent you an email with instructions how you can access the course!</p>
             <p class="text-green-500 text-right pt-4 pr-4 text-xs">launched scope</p>
         </div>
     </div>
