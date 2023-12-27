@@ -17,9 +17,7 @@
     "require": {
         "php": "^8.0",
         "brunocfalcao/eduka-nereus": "dev-master",
-        "brunocfalcao/eduka-payments": "dev-master",
-        "brunocfalcao/eduka-ui": "dev-master",
-        "fakerphp/faker": "^1.23"
+        "brunocfalcao/eduka-payments": "dev-master"
     },
     "autoload": {
         "psr-4": {
