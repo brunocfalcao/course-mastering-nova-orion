@@ -40,6 +40,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             'name' => 'Bruno Falcao (OR)',
             'email' => env('MN_OR_EMAIL'),
             'password' => bcrypt('password'),
+            'is_admin' => true,
         ]);
 
         $admin->variants()->attach($variant->id);
