@@ -44,5 +44,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
         ]);
 
         $admin->variants()->attach($variant->id);
+
+        $admin->courses()->attach($course->id);
     }
 }
