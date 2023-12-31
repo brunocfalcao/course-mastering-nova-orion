@@ -19,13 +19,17 @@
     "file": "assets/prelaunched-projects-02-5383a8f6.svg",
     "src": "resources/assets/images/prelaunched-projects-02.svg"
   },
+  "resources/assets/images/rocket.png": {
+    "file": "assets/rocket-809c629c.png",
+    "src": "resources/assets/images/rocket.png"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-f0edfbbc.css",
+    "file": "assets/app-8bac0ac5.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-4ed993c7.js",
+    "file": "assets/app-aae33a63.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
