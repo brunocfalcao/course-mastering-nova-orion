@@ -12,6 +12,8 @@ class MasteringNovaOrionCourseSeeder extends Seeder
 {
     public function run()
     {
+        return;
+
         $course = Course::create([
             'name' => 'Mastering Nova - Orion',
             'canonical' => 'course-mastering-nova-orion',
