@@ -1,4 +1,40 @@
 {
+  "resources/assets/images/favicons/android-chrome-192x192.png": {
+    "file": "assets/android-chrome-192x192-46b3a9a2.png",
+    "src": "resources/assets/images/favicons/android-chrome-192x192.png"
+  },
+  "resources/assets/images/favicons/android-chrome-512x512.png": {
+    "file": "assets/android-chrome-512x512-8406910e.png",
+    "src": "resources/assets/images/favicons/android-chrome-512x512.png"
+  },
+  "resources/assets/images/favicons/apple-touch-icon.png": {
+    "file": "assets/apple-touch-icon-8ffc7d3f.png",
+    "src": "resources/assets/images/favicons/apple-touch-icon.png"
+  },
+  "resources/assets/images/favicons/favicon-16x16.png": {
+    "file": "assets/favicon-16x16-815c0bfe.png",
+    "src": "resources/assets/images/favicons/favicon-16x16.png"
+  },
+  "resources/assets/images/favicons/favicon-32x32.png": {
+    "file": "assets/favicon-32x32-9c1c1302.png",
+    "src": "resources/assets/images/favicons/favicon-32x32.png"
+  },
+  "resources/assets/images/favicons/favicon.ico": {
+    "file": "assets/favicon-08c0ff95.ico",
+    "src": "resources/assets/images/favicons/favicon.ico"
+  },
+  "resources/assets/images/favicons/mstile-150x150.png": {
+    "file": "assets/mstile-150x150-2b1e48da.png",
+    "src": "resources/assets/images/favicons/mstile-150x150.png"
+  },
+  "resources/assets/images/favicons/safari-pinned-tab.svg": {
+    "file": "assets/safari-pinned-tab-e1f0a5e9.svg",
+    "src": "resources/assets/images/favicons/safari-pinned-tab.svg"
+  },
+  "resources/assets/images/favicons/site.webmanifest": {
+    "file": "assets/site-d77a570c.webmanifest",
+    "src": "resources/assets/images/favicons/site.webmanifest"
+  },
   "resources/assets/images/mastering-nova-mascot.svg": {
     "file": "assets/mastering-nova-mascot-1f5b0ab7.svg",
     "src": "resources/assets/images/mastering-nova-mascot.svg"
@@ -24,12 +60,12 @@
     "src": "resources/assets/images/rocket.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-8bac0ac5.css",
+    "file": "assets/app-cdb8ceab.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-aae33a63.js",
+    "file": "assets/app-4ed993c7.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
