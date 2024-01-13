@@ -17,13 +17,19 @@ class MasteringNovaOrionCourseSeeder extends Seeder
         $course = Course::create([
             'name' => 'Mastering Nova - Orion',
             'canonical' => 'course-mastering-nova-orion',
-            'admin_name' => 'Bruno Falcao',
-            'admin_email' => env('MN_OR_EMAIL'),
-            'twitter_handle' => env('MN_OR_TWITTER'),
-            'launched_at' => now()->subHours(6),
+            'domain' => env('MN_OR_DOMAIN'),
             'provider_namespace' => 'MasteringNovaOrion\\MasteringNovaOrionServiceProvider',
             'lemon_squeezy_store_id' => env('LEMON_SQUEEZY_STORE_ID'),
+            'prelaunched_at' => now()->subHours(1),
+            'launched_at' => now()->addDay(365),
+            'meta' => [
+                'description' => 'my seo description',
+                'author' => 'my seo author',
+                'twitter:site' => 'my seo twitter',
+            ],
         ]);
+
+        return;
 
         $variant = Variant::create([
             'canonical' => 'mastering-nova-orion',
