@@ -2,32 +2,81 @@
 
 namespace MasteringNovaOrion\Database\Seeders;
 
+use Eduka\Cube\Models\Chapter;
 use Eduka\Cube\Models\Course;
 use Eduka\Cube\Models\Domain;
 use Eduka\Cube\Models\User;
 use Eduka\Cube\Models\Variant;
+use Eduka\Cube\Models\Video;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class MasteringNovaOrionCourseSeeder extends Seeder
 {
     public function run()
     {
-        return;
-
         $course = Course::create([
             'name' => 'Mastering Nova - Orion',
             'canonical' => 'course-mastering-nova-orion',
             'domain' => env('MN_OR_DOMAIN'),
             'provider_namespace' => 'MasteringNovaOrion\\MasteringNovaOrionServiceProvider',
             'lemon_squeezy_store_id' => env('LEMON_SQUEEZY_STORE_ID'),
-            'prelaunched_at' => now()->subHours(1),
-            'launched_at' => now()->addDay(365),
+            'prelaunched_at' => now()->subDays(30),
+            'launched_at' => now()->subDays(15),
             'meta' => [
                 'description' => 'my seo description',
                 'author' => 'my seo author',
                 'twitter:site' => 'my seo twitter',
             ],
         ]);
+
+        // Import old data.
+        $oldChapters = DB::connection('mysql-orion')->table('chapters');
+        $oldGiveawayEmails = DB::connection('mysql-orion')->table('giveaway');
+        $oldPaddleLog = DB::connection('mysql-orion')->table('paddle_log');
+        $oldSubscribers = DB::connection('mysql-orion')->table('subscribers');
+        $oldUsers = DB::connection('mysql-orion')->table('users');
+        $oldVideos = DB::connection('mysql-orion')->table('videos');
+        $oldVideosCompleted = DB::connection('mysql-orion')->table('videos_completed');
+
+        foreach (clone $oldChapters->get() as $oldChapter) {
+            $newChapter = Chapter::create([
+                'course_id' => $course->id,
+                'name' => $oldChapter->title,
+            ]);
+
+            // Clone the query builder before fetching the videos.
+            $videosQueryBuilder = clone $oldVideos;
+
+            $videos = $videosQueryBuilder->where('chapter_id', $oldChapter->id)->get();
+
+            foreach ($videos as $oldVideo) {
+                $newVideo = Video::create([
+                    'name' => $oldVideo->title,
+                    'description' => $oldVideo->details,
+                    'chapter_id' => $newChapter->id,
+                    'course_id' => $course->id,
+                    'duration' => $oldVideo->duration
+                ]);
+            }
+
+            // Attach the video image to the video itself.
+        }
+
+        /**
+         * Add the users and then we can continue to connect to the remaining
+         * video properties.
+         */
+        foreach (clone $oldUsers->get() as $user) {
+            User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'password' => $user->password,
+                'created_at' => $user->created_at,
+                'updated_at' => $user->updated_at,
+                'deleted_at' => $user->deleted_at
+            ]);
+        }
 
         return;
 
