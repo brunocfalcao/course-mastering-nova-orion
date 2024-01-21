@@ -4,7 +4,6 @@ namespace MasteringNovaOrion\Database\Seeders;
 
 use Eduka\Cube\Models\Chapter;
 use Eduka\Cube\Models\Course;
-use Eduka\Cube\Models\Domain;
 use Eduka\Cube\Models\User;
 use Eduka\Cube\Models\Variant;
 use Eduka\Cube\Models\Video;
@@ -28,6 +27,14 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                 'author' => 'my seo author',
                 'twitter:site' => 'my seo twitter',
             ],
+        ]);
+
+        $variant = Variant::create([
+            'name' => 'Full course',
+            'description' => 'Full course from the past',
+            'course_id' => $course->id,
+            'lemon_squeezy_variant_id' => env('MN_OR_VARIANT_ID'),
+            'lemon_squeezy_price_override' => env('MN_OR_PRICE_OVERRIDE'),
         ]);
 
         // Import old data.
@@ -56,7 +63,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                     'description' => $oldVideo->details,
                     'chapter_id' => $newChapter->id,
                     'course_id' => $course->id,
-                    'duration' => $oldVideo->duration
+                    'duration' => $oldVideo->duration,
                 ]);
             }
 
@@ -74,9 +81,17 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                 'password' => $user->password,
                 'created_at' => $user->created_at,
                 'updated_at' => $user->updated_at,
-                'deleted_at' => $user->deleted_at
+                'deleted_at' => $user->deleted_at,
             ]);
         }
+
+        // Create admin user.
+        $admin = User::create([
+            'name' => 'Bruno Falcao (OR)',
+            'email' => env('MN_OR_EMAIL'),
+            'password' => bcrypt('password'),
+            'course_id_as_admin' => 1,
+        ]);
 
         return;
 
@@ -86,22 +101,5 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             'course_id' => $course->id,
             'lemon_squeezy_variant_id' => env('MN_OR_VARIANT_ID'),
         ]);
-
-        $domain = Domain::create([
-            'name' => env('MN_OR_DOMAIN'),
-            'course_id' => $course->id,
-        ]);
-
-        // Create admin user.
-        $admin = User::create([
-            'name' => 'Bruno Falcao (OR)',
-            'email' => env('MN_OR_EMAIL'),
-            'password' => bcrypt('password'),
-            'is_admin' => true,
-        ]);
-
-        $admin->variants()->attach($variant->id);
-
-        $admin->courses()->attach($course->id);
     }
 }
