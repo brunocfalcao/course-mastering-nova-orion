@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.2",
         "brunocfalcao/eduka-nereus": "dev-master",
         "brunocfalcao/eduka-payments": "dev-master"
     },
