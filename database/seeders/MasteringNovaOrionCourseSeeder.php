@@ -216,7 +216,6 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                 $video = Video::firstWhere('old_id', $videoCompleted->video_id);
 
                 if ($video && $user) {
-                    info('Attaching video '.$video->id.', to user '.$user->id);
                     $video->usersThatCompleted()->attach(
                         $user,
                         ['created_at' => $videoCompleted->created_at]
