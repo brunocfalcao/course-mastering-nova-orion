@@ -177,12 +177,14 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             $videos = $videosQueryBuilder->where('chapter_id', $oldChapter->id)->get();
 
             // Add image for SEO.
-            if (array_key_exists($oldChapter->id, $oldChapterFilenames)) {
-                $newChapter->update([
+            if (env('MN_OR_IMPORT_ASSETS') === true) {
+                if (array_key_exists($oldChapter->id, $oldChapterFilenames)) {
+                    $newChapter->update([
                     'filename' => Storage::disk('public')
                         ->putFile(__DIR__.
                                   '/../assets/'.
                                   $oldChapterFilenames[$oldChapter->id])]);
+                }
             }
 
             foreach ($videos as $oldVideo) {
@@ -196,12 +198,14 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                 ]);
 
                 // Attach video image for SEO.
-                if (array_key_exists($oldVideo->id, $oldVideoFilenames)) {
-                    $newVideo->update([
+                if (env('MN_OR_IMPORT_ASSETS') === true) {
+                    if (array_key_exists($oldVideo->id, $oldVideoFilenames)) {
+                        $newVideo->update([
                         'filename' => Storage::disk('public')
                             ->putFile(__DIR__.
                                       '/../assets/'.
                                       $oldVideoFilenames[$oldVideo->id])]);
+                    }
                 }
             }
 
