@@ -79,6 +79,9 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             ]);
         }
 
+        // Let's delete my test user so we can use it for testing purposes.
+        User::where('email', 'MN_OR_TEST_EMAIL')->forceDelete();
+
         // Additionally add giveaway emails as subscribers.
         foreach (clone $oldGiveawayEmails->get() as $participant) {
             Subscriber::create([
