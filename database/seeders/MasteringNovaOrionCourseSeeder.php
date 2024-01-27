@@ -17,7 +17,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
     public function run()
     {
         $course = Course::create([
-            'name' => 'Mastering Nova - Orion (' . env('MN_OR_DOMAIN') . ')',
+            'name' => 'Mastering Nova - Orion ('.env('MN_OR_DOMAIN').')',
             'canonical' => 'course-mastering-nova-orion',
             'domain' => env('MN_OR_DOMAIN'),
             'provider_namespace' => 'MasteringNovaOrion\\MasteringNovaOrionServiceProvider',
@@ -180,10 +180,10 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             if (env('MN_OR_IMPORT_ASSETS') === true) {
                 if (array_key_exists($oldChapter->id, $oldChapterFilenames)) {
                     $newChapter->update([
-                    'filename' => Storage::disk('public')
-                        ->putFile(__DIR__.
-                                  '/../assets/'.
-                                  $oldChapterFilenames[$oldChapter->id])]);
+                        'filename' => Storage::disk('public')
+                            ->putFile(__DIR__.
+                                      '/../assets/'.
+                                      $oldChapterFilenames[$oldChapter->id])]);
                 }
             }
 
@@ -201,10 +201,10 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                 if (env('MN_OR_IMPORT_ASSETS') === true) {
                     if (array_key_exists($oldVideo->id, $oldVideoFilenames)) {
                         $newVideo->update([
-                        'filename' => Storage::disk('public')
-                            ->putFile(__DIR__.
-                                      '/../assets/'.
-                                      $oldVideoFilenames[$oldVideo->id])]);
+                            'filename' => Storage::disk('public')
+                                ->putFile(__DIR__.
+                                          '/../assets/'.
+                                          $oldVideoFilenames[$oldVideo->id])]);
                     }
                 }
             }
