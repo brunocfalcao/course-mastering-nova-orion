@@ -31,6 +31,8 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             ],
         ]);
 
+        return;
+
         $course->update([
             'filename' => Storage::disk('public')
                 ->putFile(__DIR__.
