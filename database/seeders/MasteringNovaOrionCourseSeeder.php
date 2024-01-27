@@ -17,7 +17,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
     public function run()
     {
         $course = Course::create([
-            'name' => 'Mastering Nova - Orion',
+            'name' => 'Mastering Nova - Orion (' . env('MN_OR_DOMAIN') . ')',
             'canonical' => 'course-mastering-nova-orion',
             'domain' => env('MN_OR_DOMAIN'),
             'provider_namespace' => 'MasteringNovaOrion\\MasteringNovaOrionServiceProvider',
@@ -78,9 +78,6 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                 'deleted_at' => $user->deleted_at,
             ]);
         }
-
-        // Let's delete my test user so we can use it for testing purposes.
-        User::where('email', 'MN_OR_TEST_EMAIL')->forceDelete();
 
         // Additionally add giveaway emails as subscribers.
         foreach (clone $oldGiveawayEmails->get() as $participant) {
@@ -226,5 +223,9 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                 }
             }
         }
+        // End of $oldChapters loop.
+
+        // Let's delete my test user so we can use it for testing purposes.
+        User::where('email', 'MN_OR_TEST_EMAIL')->forceDelete();
     }
 }
