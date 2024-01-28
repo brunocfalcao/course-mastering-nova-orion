@@ -36,8 +36,6 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                 ->putFile(__DIR__.
                           '/../assets/social-card.jpg')]);
 
-        return;
-
         $variant = Variant::create([
             'name' => 'Full course',
             'description' => 'Full course from the past',
