@@ -226,6 +226,6 @@ class MasteringNovaOrionCourseSeeder extends Seeder
         // End of $oldChapters loop.
 
         // Let's delete my test user so we can use it for testing purposes.
-        User::where('email', 'MN_OR_TEST_EMAIL')->forceDelete();
+        User::where('email', env('MN_OR_TEST_EMAIL'))->forceDelete();
     }
 }
