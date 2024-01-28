@@ -31,12 +31,12 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             ],
         ]);
 
-        return;
-
         $course->update([
             'filename' => Storage::disk('public')
                 ->putFile(__DIR__.
                           '/../assets/social-card.jpg')]);
+
+        return;
 
         $variant = Variant::create([
             'name' => 'Full course',
