@@ -225,7 +225,12 @@ class MasteringNovaOrionCourseSeeder extends Seeder
         }
         // End of $oldChapters loop.
 
-        // Let's delete my test user so we can use it for testing purposes.
+        // Delete relationship data from test user.
+        User::where('email', env('MN_OR_TEST_EMAIL'))->first()
+            ->videosThatWereCompleted()
+            ->detach();
+
+        // Delete test user.
         User::where('email', env('MN_OR_TEST_EMAIL'))->forceDelete();
     }
 }
