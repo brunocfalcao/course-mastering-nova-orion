@@ -21,9 +21,15 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             'canonical' => 'course-mastering-nova-orion',
             'domain' => env('MN_OR_DOMAIN'),
             'provider_namespace' => 'MasteringNovaOrion\\MasteringNovaOrionServiceProvider',
+
             'lemon_squeezy_store_id' => env('LEMON_SQUEEZY_STORE_ID'),
+            'lemon_squeezy_api_key' => env('LEMON_SQUEEZY_API_KEY'),
+            'lemon_squeezy_secret_key' => env('LEMON_SQUEEZY_SECRET_KEY'),
+            'lemon_squeezy_hash_key' => env('LEMON_SQUEEZY_HASH_KEY'),
+
             'prelaunched_at' => now()->subDays(30),
             'launched_at' => now()->subDays(15),
+
             'meta' => [
                 'description' => 'my seo description',
                 'author' => 'my seo author',
