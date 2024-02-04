@@ -4,6 +4,7 @@ namespace MasteringNovaOrion\Database\Seeders;
 
 use Eduka\Cube\Models\Chapter;
 use Eduka\Cube\Models\Course;
+use Eduka\Cube\Models\Organization;
 use Eduka\Cube\Models\Subscriber;
 use Eduka\Cube\Models\User;
 use Eduka\Cube\Models\Variant;
@@ -16,15 +17,21 @@ class MasteringNovaOrionCourseSeeder extends Seeder
 {
     public function run()
     {
+        $organization = Organization::create([
+            'name' => 'brunofalcao.dev',
+            'domain' => env('EDUKA_BACKEND_URL'),
+            'provider_namespace' => '\Eduka\Dev\DevServiceProvider::class',
+        ]);
+
         $course = Course::create([
             'name' => 'Mastering Nova - Orion ('.env('MN_OR_DOMAIN').')',
             'canonical' => 'course-mastering-nova-orion',
             'domain' => env('MN_OR_DOMAIN'),
             'provider_namespace' => 'MasteringNovaOrion\\MasteringNovaOrionServiceProvider',
+            'organization_id' => $organization->id,
 
             'lemon_squeezy_store_id' => env('LEMON_SQUEEZY_STORE_ID'),
             'lemon_squeezy_api_key' => env('LEMON_SQUEEZY_API_KEY'),
-            'lemon_squeezy_secret_key' => env('LEMON_SQUEEZY_SECRET_KEY'),
             'lemon_squeezy_hash_key' => env('LEMON_SQUEEZY_HASH_KEY'),
 
             'prelaunched_at' => now()->subDays(30),
