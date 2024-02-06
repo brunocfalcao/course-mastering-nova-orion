@@ -17,11 +17,15 @@ class MasteringNovaOrionCourseSeeder extends Seeder
 {
     public function run()
     {
-        $organization = Organization::create([
-            'name' => 'brunofalcao.dev',
-            'domain' => env('EDUKA_BACKEND_URL'),
-            'provider_namespace' => '\Eduka\Dev\DevServiceProvider::class',
-        ]);
+        if (! Organization::exists()) {
+            $organization = Organization::create([
+                'name' => 'brunofalcao.dev',
+                'domain' => env('EDUKA_BACKEND_URL'),
+                'provider_namespace' => '\Eduka\Dev\DevServiceProvider',
+            ]);
+        } else {
+            $organization = Organization::find(1);
+        }
 
         $course = Course::create([
             'name' => 'Mastering Nova - Orion ('.env('MN_OR_DOMAIN').')',
@@ -113,7 +117,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             'name' => 'Bruno Falcao (OR)',
             'email' => env('MN_OR_EMAIL'),
             'password' => bcrypt('password'),
-            'course_id_as_admin' => 1,
+            'course_id_as_admin' => $course_id,
         ]);
 
         // Image mappings (key=id)
