@@ -117,7 +117,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             'name' => 'Bruno Falcao (OR)',
             'email' => env('MN_OR_EMAIL'),
             'password' => bcrypt('password'),
-            'course_id_as_admin' => $course_id,
+            'course_id_as_admin' => $course->id,
         ]);
 
         // Image mappings (key=id)
@@ -241,13 +241,5 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             }
         }
         // End of $oldChapters loop.
-
-        // Delete relationship data from test user.
-        User::where('email', env('MN_OR_TEST_EMAIL'))->first()
-            ->videosThatWereCompleted()
-            ->detach();
-
-        // Delete test user.
-        User::where('email', env('MN_OR_TEST_EMAIL'))->forceDelete();
     }
 }
