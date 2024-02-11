@@ -96,20 +96,24 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             ]);
         }
 
-        // Additionally add giveaway emails as subscribers.
+        // Additionally add giveaway emails as subscribers, without sending emails.
         foreach (clone $oldGiveawayEmails->get() as $participant) {
-            Subscriber::create([
-                'email' => $participant->email,
-                'course_id' => $course->id,
-            ]);
+            Subscriber::withoutEvents(function () use ($participant, $course) {
+                Subscriber::create([
+                    'email' => $participant->email,
+                    'course_id' => $course->id,
+                ]);
+            });
         }
 
-        // Add subscribers.
+        // Add subscribers without calling events (no nobody receives emails).
         foreach (clone $oldSubscribers->get() as $subscriber) {
-            Subscriber::create([
-                'email' => $subscriber->email,
-                'course_id' => $course->id,
-            ]);
+            Subscriber::withoutEvents(function () use ($subscriber, $course) {
+                Subscriber::create([
+                    'email' => $subscriber->email,
+                    'course_id' => $course->id,
+                ]);
+            });
         }
 
         // Create admin user.
