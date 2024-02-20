@@ -4,6 +4,7 @@ namespace MasteringNovaOrion\Database\Seeders;
 
 use Eduka\Cube\Models\Chapter;
 use Eduka\Cube\Models\Course;
+use Eduka\Cube\Models\Order;
 use Eduka\Cube\Models\Organization;
 use Eduka\Cube\Models\Subscriber;
 use Eduka\Cube\Models\User;
@@ -67,6 +68,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
         // Migrated.
         $oldGiveawayEmails = DB::connection('mysql-orion')->table('giveaway');
 
+        // Migrated.
         $oldPaddleLog = DB::connection('mysql-orion')->table('paddle_log');
 
         // Migrated.
@@ -86,14 +88,16 @@ class MasteringNovaOrionCourseSeeder extends Seeder
          * video properties.
          */
         foreach (clone $oldUsers->get() as $user) {
-            User::create([
-                'name' => $user->name,
-                'email' => $user->email,
-                'password' => $user->password,
-                'created_at' => $user->created_at,
-                'updated_at' => $user->updated_at,
-                'deleted_at' => $user->deleted_at,
-            ]);
+            User::withoutEvents(function () use ($user) {
+                User::create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'password' => $user->password,
+                    'created_at' => $user->created_at,
+                    'updated_at' => $user->updated_at,
+                    'deleted_at' => $user->deleted_at,
+                ]);
+            });
         }
 
         // Additionally add giveaway emails as subscribers, without sending emails.
@@ -232,12 +236,12 @@ class MasteringNovaOrionCourseSeeder extends Seeder
 
             $completedList = clone $oldVideosCompleted;
 
-            foreach ($completedList->get() as $videoCompleted) {
+            foreach (clone $completedList->get() as $videoCompleted) {
                 $user = User::firstWhere('id', $videoCompleted->user_id);
                 $video = Video::firstWhere('old_id', $videoCompleted->video_id);
 
                 if ($video && $user) {
-                    $video->usersThatCompleted()->attach(
+                    $video->usersThatSaw()->attach(
                         $user,
                         ['created_at' => $videoCompleted->created_at]
                     );
@@ -245,5 +249,36 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             }
         }
         // End of $oldChapters loop.
+
+        // Time to sync the orders vs paddle_log
+        foreach (clone $oldPaddleLog->get() as $paddleLog) {
+            Order::withoutEvents(function () use ($paddleLog, $variant) {
+
+                $user = User::firstWhere('email', $paddleLog->email);
+
+                if ($user) {
+                    Order::create([
+                        'provider' => 'paddle',
+                        'variant_id' => $variant->id,
+                        'course_id' => $variant->course->id,
+                        'store_id' => $variant->course->lemon_squeezy_store_id,
+                        'user_id' => $user->id,
+                        'country' => $paddleLog->country,
+                        'response_body' => (array) $paddleLog,
+                        'custom_data' => $paddleLog->passthrough,
+                        'event_name' => $paddleLog->alert_name,
+                        'user_name' => $paddleLog->customer_name,
+                        'user_email' => $paddleLog->email,
+                        'total_usd' => $paddleLog->sale_gross,
+                        'price' => $paddleLog->sale_gross,
+                        'order_id' => $paddleLog->order_id,
+                        'refunded' => false,
+                        'receipt' => $paddleLog->receipt_url,
+                        'created_at' => $paddleLog->created_at,
+                        'updated_at' => $paddleLog->created_at,
+                    ]);
+                }
+            });
+        }
     }
 }
