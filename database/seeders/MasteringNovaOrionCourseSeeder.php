@@ -36,12 +36,18 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             'provider_namespace' => 'MasteringNovaOrion\\MasteringNovaOrionServiceProvider',
             'organization_id' => $organization->id,
 
+            'vimeo_folder_id' => env('MN_OR_COURSE_VIMEO_FOLDER_ID'),
+            'vimeo_uri' => env('MN_OR_COURSE_VIMEO_FOLDER_ID'),
+
             'lemon_squeezy_store_id' => env('LEMON_SQUEEZY_STORE_ID'),
             'lemon_squeezy_api_key' => env('LEMON_SQUEEZY_API_KEY'),
             'lemon_squeezy_hash_key' => env('LEMON_SQUEEZY_HASH_KEY'),
 
             'prelaunched_at' => now()->subDays(30),
             'launched_at' => now()->subDays(15),
+
+            'admin_email' => env('MN_OR_EMAIL'),
+            'admin_name' => 'Bruno Falcao (OR)',
 
             'meta_names' => [
                 'description' => 'my seo description',
@@ -126,7 +132,6 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             'name' => 'Bruno Falcao (OR)',
             'email' => env('MN_OR_EMAIL'),
             'password' => bcrypt('password'),
-            'course_id_as_admin' => $course->id,
         ]);
 
         // Image mappings (key=id)
@@ -191,10 +196,35 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             51 => 'spatie-multitenancy.jpg',
         ];
 
+        // Lets map the video data from chapters, directly.
+        $vimeoData = [
+            'Nova Fundamentals' => [
+                'vimeo_uri' => '/users/78811133/projects/19631832',
+                'vimeo_folder_id' => 19631832,
+            ],
+
+            'Deep Dive on Resources' => [
+                'vimeo_uri' => '/users/78811133/projects/19631835',
+                'vimeo_folder_id' => 19631835,
+            ],
+
+            'Deep Dive on UI Components' => [
+                'vimeo_uri' => '/users/78811133/projects/19631837',
+                'vimeo_folder_id' => 19631837,
+            ],
+
+            'Best community Packages' => [
+                'vimeo_uri' => '/users/78811133/projects/19631842',
+                'vimeo_folder_id' => 19631842,
+            ],
+        ];
+
         foreach (clone $oldChapters->get() as $oldChapter) {
             $newChapter = Chapter::create([
                 'course_id' => $course->id,
                 'name' => $oldChapter->title,
+                'vimeo_uri' => $vimeoData[$oldChapter->title]['vimeo_uri'],
+                'vimeo_folder_id' => $vimeoData[$oldChapter->title]['vimeo_folder_id'],
             ]);
 
             // Clone the query builder before fetching the videos.
@@ -328,14 +358,15 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                             'twitter:description' => $descriptions[$video->old_id],
                             'twitter:image' => env('MN_OR_DOMAIN').'/storage/'.$video->filename,
                             'twitter:creator' => '@'.env('MN_OR_TWITTER'),
-                            '',
                         ],
+
                         'meta_properties' => [
-                            'twitter:site' => env('MN_OR_DOMAIN').'/video/'.$video->uuid,
-                            'twitter:title' => $video->name,
-                            'twitter:description' => $descriptions[$video->old_id],
-                            'twitter:image' => env('MN_OR_DOMAIN').'/storage/'.$video->filename,
-                            'twitter:creator' => '@'.env('MN_OR_TWITTER'),
+                            'og:url' => env('MN_OR_DOMAIN'),
+                            'og:type' => 'article',
+                            'og:title' => $video->name,
+                            'og:description' => $descriptions[$video->old_id],
+                            'og:image' => env('MN_OR_DOMAIN').'/storage/'.$video->filename,
+                            'description' => $descriptions[$video->old_id],
                         ],
                     ]);
                 }
