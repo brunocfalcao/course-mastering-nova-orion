@@ -29,6 +29,14 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             $organization = Organization::find(1);
         }
 
+        // Create admin user.
+        $admin = User::create([
+            'name' => 'Bruno Falcao (OR)',
+            'email' => env('MN_OR_EMAIL'),
+            'password' => bcrypt('password'),
+        ]);
+
+        // Create course.
         $course = Course::create([
             'name' => 'Mastering Nova - Orion ('.env('MN_OR_DOMAIN').')',
             'canonical' => 'course-mastering-nova-orion',
@@ -36,8 +44,8 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             'provider_namespace' => 'MasteringNovaOrion\\MasteringNovaOrionServiceProvider',
             'organization_id' => $organization->id,
 
-            'vimeo_folder_id' => env('MN_OR_COURSE_VIMEO_FOLDER_ID'),
-            'vimeo_uri' => env('MN_OR_COURSE_VIMEO_URI'),
+            //'vimeo_folder_id' => env('MN_OR_COURSE_VIMEO_FOLDER_ID'),
+            //'vimeo_uri' => env('MN_OR_COURSE_VIMEO_URI'),
 
             'lemon_squeezy_store_id' => env('LEMON_SQUEEZY_STORE_ID'),
             'lemon_squeezy_api_key' => env('LEMON_SQUEEZY_API_KEY'),
@@ -126,13 +134,6 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                 ]);
             });
         }
-
-        // Create admin user.
-        $admin = User::create([
-            'name' => 'Bruno Falcao (OR)',
-            'email' => env('MN_OR_EMAIL'),
-            'password' => bcrypt('password'),
-        ]);
 
         // Image mappings (key=id)
         $oldChapterFilenames = [
@@ -223,8 +224,8 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             $newChapter = Chapter::create([
                 'course_id' => $course->id,
                 'name' => $oldChapter->title,
-                'vimeo_uri' => $vimeoData[$oldChapter->title]['vimeo_uri'],
-                'vimeo_folder_id' => $vimeoData[$oldChapter->title]['vimeo_folder_id'],
+                //'vimeo_uri' => $vimeoData[$oldChapter->title]['vimeo_uri'],
+                //'vimeo_folder_id' => $vimeoData[$oldChapter->title]['vimeo_folder_id'],
             ]);
 
             // Clone the query builder before fetching the videos.
