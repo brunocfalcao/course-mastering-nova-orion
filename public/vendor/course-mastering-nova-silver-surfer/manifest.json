@@ -1,71 +1,119 @@
 {
-  "resources/assets/images/favicons/android-chrome-192x192.png": {
-    "file": "assets/android-chrome-192x192-46b3a9a2.png",
-    "src": "resources/assets/images/favicons/android-chrome-192x192.png"
+  "resources/assets/favicons/android-chrome-192x192.png": {
+    "file": "assets/android-chrome-192x192-df6b6887.png",
+    "src": "resources/assets/favicons/android-chrome-192x192.png"
   },
-  "resources/assets/images/favicons/android-chrome-512x512.png": {
-    "file": "assets/android-chrome-512x512-8406910e.png",
-    "src": "resources/assets/images/favicons/android-chrome-512x512.png"
+  "resources/assets/favicons/android-chrome-512x512.png": {
+    "file": "assets/android-chrome-512x512-0798e948.png",
+    "src": "resources/assets/favicons/android-chrome-512x512.png"
   },
-  "resources/assets/images/favicons/apple-touch-icon.png": {
-    "file": "assets/apple-touch-icon-8ffc7d3f.png",
-    "src": "resources/assets/images/favicons/apple-touch-icon.png"
+  "resources/assets/favicons/apple-touch-icon.png": {
+    "file": "assets/apple-touch-icon-d85c9f40.png",
+    "src": "resources/assets/favicons/apple-touch-icon.png"
   },
-  "resources/assets/images/favicons/favicon-16x16.png": {
-    "file": "assets/favicon-16x16-815c0bfe.png",
-    "src": "resources/assets/images/favicons/favicon-16x16.png"
+  "resources/assets/favicons/favicon-16x16.png": {
+    "file": "assets/favicon-16x16-09a72e8d.png",
+    "src": "resources/assets/favicons/favicon-16x16.png"
   },
-  "resources/assets/images/favicons/favicon-32x32.png": {
-    "file": "assets/favicon-32x32-9c1c1302.png",
-    "src": "resources/assets/images/favicons/favicon-32x32.png"
+  "resources/assets/favicons/favicon-32x32.png": {
+    "file": "assets/favicon-32x32-4fd12b2a.png",
+    "src": "resources/assets/favicons/favicon-32x32.png"
   },
-  "resources/assets/images/favicons/favicon.ico": {
-    "file": "assets/favicon-08c0ff95.ico",
-    "src": "resources/assets/images/favicons/favicon.ico"
+  "resources/assets/favicons/favicon.ico": {
+    "file": "assets/favicon-5195fbfa.ico",
+    "src": "resources/assets/favicons/favicon.ico"
   },
-  "resources/assets/images/favicons/mstile-150x150.png": {
-    "file": "assets/mstile-150x150-2b1e48da.png",
-    "src": "resources/assets/images/favicons/mstile-150x150.png"
+  "resources/assets/favicons/mstile-150x150.png": {
+    "file": "assets/mstile-150x150-169763b2.png",
+    "src": "resources/assets/favicons/mstile-150x150.png"
   },
-  "resources/assets/images/favicons/safari-pinned-tab.svg": {
-    "file": "assets/safari-pinned-tab-e1f0a5e9.svg",
-    "src": "resources/assets/images/favicons/safari-pinned-tab.svg"
+  "resources/assets/favicons/safari-pinned-tab.svg": {
+    "file": "assets/safari-pinned-tab-51d28c70.svg",
+    "src": "resources/assets/favicons/safari-pinned-tab.svg"
   },
-  "resources/assets/images/favicons/site.webmanifest": {
-    "file": "assets/site-d77a570c.webmanifest",
-    "src": "resources/assets/images/favicons/site.webmanifest"
+  "resources/assets/images/March 2023.svg": {
+    "file": "assets/March 2023-617e0a76.svg",
+    "src": "resources/assets/images/March 2023.svg"
   },
-  "resources/assets/images/mastering-nova-mascot.svg": {
-    "file": "assets/mastering-nova-mascot-1f5b0ab7.svg",
-    "src": "resources/assets/images/mastering-nova-mascot.svg"
+  "resources/assets/images/background-desktop.jpg": {
+    "file": "assets/background-desktop-d222f32f.jpg",
+    "src": "resources/assets/images/background-desktop.jpg"
   },
-  "resources/assets/images/prelaunched-bg.png": {
-    "file": "assets/prelaunched-bg-423bc383.png",
-    "src": "resources/assets/images/prelaunched-bg.png"
+  "resources/assets/images/background-full.png": {
+    "file": "assets/background-full-d3b49bca.png",
+    "src": "resources/assets/images/background-full.png"
   },
-  "resources/assets/images/prelaunched-image.png": {
-    "file": "assets/prelaunched-image-93a95bd7.png",
-    "src": "resources/assets/images/prelaunched-image.png"
+  "resources/assets/images/background-hybrid.jpg": {
+    "file": "assets/background-hybrid-7cb5fbca.jpg",
+    "src": "resources/assets/images/background-hybrid.jpg"
   },
-  "resources/assets/images/prelaunched-projects-01.svg": {
-    "file": "assets/prelaunched-projects-01-c4753032.svg",
-    "src": "resources/assets/images/prelaunched-projects-01.svg"
+  "resources/assets/images/background-mobile.jpg": {
+    "file": "assets/background-mobile-ad5e7d38.jpg",
+    "src": "resources/assets/images/background-mobile.jpg"
   },
-  "resources/assets/images/prelaunched-projects-02.svg": {
-    "file": "assets/prelaunched-projects-02-5383a8f6.svg",
-    "src": "resources/assets/images/prelaunched-projects-02.svg"
+  "resources/assets/images/background.png": {
+    "file": "assets/background-5360a9f2.png",
+    "src": "resources/assets/images/background.png"
   },
-  "resources/assets/images/rocket.png": {
-    "file": "assets/rocket-809c629c.png",
-    "src": "resources/assets/images/rocket.png"
+  "resources/assets/images/logo-wide-large.png": {
+    "file": "assets/logo-wide-large-c911132b.png",
+    "src": "resources/assets/images/logo-wide-large.png"
+  },
+  "resources/assets/images/logo-wide.png": {
+    "file": "assets/logo-wide-14f8489b.png",
+    "src": "resources/assets/images/logo-wide.png"
+  },
+  "resources/assets/images/logo.png": {
+    "file": "assets/logo-4f810e53.png",
+    "src": "resources/assets/images/logo.png"
+  },
+  "resources/assets/images/progress/progress-25-resized.png": {
+    "file": "assets/progress-25-resized-ccec1b9f.png",
+    "src": "resources/assets/images/progress/progress-25-resized.png"
+  },
+  "resources/assets/images/progress/progress-25.png": {
+    "file": "assets/progress-25-a736262e.png",
+    "src": "resources/assets/images/progress/progress-25.png"
+  },
+  "resources/assets/images/progress/progress-50-resized.png": {
+    "file": "assets/progress-50-resized-83532cd1.png",
+    "src": "resources/assets/images/progress/progress-50-resized.png"
+  },
+  "resources/assets/images/progress/progress-50.png": {
+    "file": "assets/progress-50-6ddd05c9.png",
+    "src": "resources/assets/images/progress/progress-50.png"
+  },
+  "resources/assets/images/progress/progress-75-resized.png": {
+    "file": "assets/progress-75-resized-7223d99c.png",
+    "src": "resources/assets/images/progress/progress-75-resized.png"
+  },
+  "resources/assets/images/progress/progress-75.png": {
+    "file": "assets/progress-75-84cd1260.png",
+    "src": "resources/assets/images/progress/progress-75.png"
+  },
+  "resources/assets/images/progress/progress-99-resized.png": {
+    "file": "assets/progress-99-resized-884ff066.png",
+    "src": "resources/assets/images/progress/progress-99-resized.png"
+  },
+  "resources/assets/images/progress/progress-99.png": {
+    "file": "assets/progress-99-94d7cbcb.png",
+    "src": "resources/assets/images/progress/progress-99.png"
+  },
+  "resources/assets/images/showcase-cropped.jpg": {
+    "file": "assets/showcase-cropped-c53e7d56.jpg",
+    "src": "resources/assets/images/showcase-cropped.jpg"
+  },
+  "resources/assets/images/showcase.png": {
+    "file": "assets/showcase-92096ed4.png",
+    "src": "resources/assets/images/showcase.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-38025ca3.css",
+    "file": "assets/app-00127171.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-4ed993c7.js",
+    "file": "assets/app-d3108b64.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
