@@ -39,6 +39,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
         // Create course.
         $course = Course::create([
             'name' => 'Mastering Nova - Orion ('.env('MN_OR_DOMAIN').')',
+            'description' => 'Course to learn Laravel Nova - Orion version',
             'canonical' => 'course-mastering-nova-orion',
             'domain' => env('MN_OR_DOMAIN'),
             'provider_namespace' => 'MasteringNovaOrion\\MasteringNovaOrionServiceProvider',
@@ -56,12 +57,6 @@ class MasteringNovaOrionCourseSeeder extends Seeder
 
             'admin_email' => env('MN_OR_EMAIL'),
             'admin_name' => 'Bruno Falcao (OR)',
-
-            'meta_names' => [
-                'description' => 'my seo description',
-                'author' => 'my seo author',
-                'twitter:site' => 'my seo twitter',
-            ],
         ]);
 
         $course->update([
@@ -350,6 +345,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             }
 
             // Update the SEO metadata for each video.
+            /*
             foreach (Video::all() as $video) {
                 if ($video->old_id) {
                     $video->update([
@@ -372,6 +368,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                     ]);
                 }
             }
+            */
 
             foreach (clone $oldVideosCompleted->get() as $videoCompleted) {
                 $user = User::firstWhere('id', $videoCompleted->user_id);
