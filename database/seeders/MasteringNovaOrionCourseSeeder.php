@@ -5,11 +5,11 @@ namespace MasteringNovaOrion\Database\Seeders;
 use Eduka\Cube\Models\Backend;
 use Eduka\Cube\Models\Chapter;
 use Eduka\Cube\Models\Course;
+use Eduka\Cube\Models\Episode;
 use Eduka\Cube\Models\Order;
 use Eduka\Cube\Models\Student;
 use Eduka\Cube\Models\Subscriber;
 use Eduka\Cube\Models\Variant;
-use Eduka\Cube\Models\Video;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -88,14 +88,14 @@ class MasteringNovaOrionCourseSeeder extends Seeder
         $oldUsers = DB::connection('mysql-orion')->table('users');
 
         // Migrated.
-        $oldVideos = DB::connection('mysql-orion')->table('videos');
+        $oldEpisodes = DB::connection('mysql-orion')->table('videos');
 
         // Migrated.
         $oldVideosCompleted = DB::connection('mysql-orion')->table('videos_completed');
 
         /**
          * Add the users and then we can continue to connect to the remaining
-         * video properties.
+         * episode properties.
          */
         foreach (clone $oldUsers->get() as $student) {
             Student::withoutEvents(function () use ($student) {
@@ -138,7 +138,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             4 => 'best-community-packages-social-card.jpg',
         ];
 
-        $oldVideoFilenames = [
+        $oldEpisodeFilenames = [
             1 => 'installing-nova.jpg',
             2 => 'first-glance-at-the-file-structure.jpg',
             3 => 'what-is-a-resource.jpg',
@@ -192,7 +192,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             51 => 'spatie-multitenancy.jpg',
         ];
 
-        // Lets map the video data from chapters, directly.
+        // Lets map the episode data from chapters, directly.
         $vimeoData = [
             'Nova Fundamentals' => [
                 'vimeo_uri' => '/users/78811133/projects/19631832',
@@ -223,10 +223,10 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                 //'vimeo_folder_id' => $vimeoData[$oldChapter->title]['vimeo_folder_id'],
             ]);
 
-            // Clone the query builder before fetching the videos.
-            $videosQueryBuilder = clone $oldVideos;
+            // Clone the query builder before fetching the episodes.
+            $episodesQueryBuilder = clone $oldEpisodes;
 
-            $videos = $videosQueryBuilder->where('chapter_id', $oldChapter->id)->get();
+            $episodes = $episodesQueryBuilder->where('chapter_id', $oldChapter->id)->get();
 
             // Add image for SEO.
             if (env('MN_OR_IMPORT_ASSETS') === true) {
@@ -302,7 +302,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                 51 => "Implement Spatie's multitenancy package in Nova to manage database connections dynamically based on tenant subdomains, streamlining multi-tenant applications",
             ];
 
-            foreach ($videos as $oldVideo) {
+            foreach ($episodes as $oldEpisode) {
 
                 /**
 <meta name="twitter:site" content="@tailwindcss" inertia>
@@ -319,51 +319,51 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                  */
                 $uuid = (string) Str::uuid();
 
-                $newVideo = Video::create([
-                    'old_id' => $oldVideo->id,
-                    'name' => $oldVideo->title,
+                $newEpisode = Episode::create([
+                    'old_id' => $oldEpisode->id,
+                    'name' => $oldEpisode->title,
                     'uuid' => $uuid,
-                    'description' => $oldVideo->details,
+                    'description' => $oldEpisode->details,
                     'chapter_id' => $newChapter->id,
                     'course_id' => $course->id,
-                    'duration' => $oldVideo->duration,
-                    'is_visible' => $oldVideo->is_visible,
-                    'is_active' => $oldVideo->is_active,
-                    'is_free' => $oldVideo->is_free,
+                    'duration' => $oldEpisode->duration,
+                    'is_visible' => $oldEpisode->is_visible,
+                    'is_active' => $oldEpisode->is_active,
+                    'is_free' => $oldEpisode->is_free,
                 ]);
 
-                // Attach video image for SEO.
+                // Attach episode image for SEO.
                 if (env('MN_OR_IMPORT_ASSETS') === true) {
-                    if (array_key_exists($oldVideo->id, $oldVideoFilenames)) {
-                        $newVideo->update([
+                    if (array_key_exists($oldEpisode->id, $oldEpisodeFilenames)) {
+                        $newEpisode->update([
                             'filename' => Storage::disk('public')
                                 ->putFile(__DIR__.
                                           '/../assets/'.
-                                          $oldVideoFilenames[$oldVideo->id])]);
+                                          $oldEpisodeFilenames[$oldEpisode->id])]);
                     }
                 }
             }
 
-            // Update the SEO metadata for each video.
+            // Update the SEO metadata for each episode.
             /*
-            foreach (Video::all() as $video) {
-                if ($video->old_id) {
-                    $video->update([
+            foreach (Episode::all() as $episode) {
+                if ($episode->old_id) {
+                    $episode->update([
                         'meta_names' => [
-                            'twitter:site' => env('MN_OR_DOMAIN').'/video/'.$video->uuid,
-                            'twitter:title' => $video->name,
-                            'twitter:description' => $descriptions[$video->old_id],
-                            'twitter:image' => env('MN_OR_DOMAIN').'/storage/'.$video->filename,
+                            'twitter:site' => env('MN_OR_DOMAIN').'/episode/'.$episode->uuid,
+                            'twitter:title' => $episode->name,
+                            'twitter:description' => $descriptions[$episode->old_id],
+                            'twitter:image' => env('MN_OR_DOMAIN').'/storage/'.$episode->filename,
                             'twitter:creator' => '@'.env('MN_OR_TWITTER'),
                         ],
 
                         'meta_properties' => [
                             'og:url' => env('MN_OR_DOMAIN'),
                             'og:type' => 'article',
-                            'og:title' => $video->name,
-                            'og:description' => $descriptions[$video->old_id],
-                            'og:image' => env('MN_OR_DOMAIN').'/storage/'.$video->filename,
-                            'description' => $descriptions[$video->old_id],
+                            'og:title' => $episode->name,
+                            'og:description' => $descriptions[$episode->old_id],
+                            'og:image' => env('MN_OR_DOMAIN').'/storage/'.$episode->filename,
+                            'description' => $descriptions[$episode->old_id],
                         ],
                     ]);
                 }
@@ -372,18 +372,18 @@ class MasteringNovaOrionCourseSeeder extends Seeder
 
             foreach (clone $oldVideosCompleted->get() as $videoCompleted) {
                 $student = Student::firstWhere('id', $videoCompleted->user_id);
-                $video = Video::firstWhere('old_id', $videoCompleted->video_id);
+                $episode = Episode::firstWhere('old_id', $videoCompleted->video_id);
 
-                if ($video && $student) {
+                if ($episode && $student) {
                     // Delete other lines
-                    DB::table('student_video_seen')->where([
+                    DB::table('student_episode_seen')->where([
                         'student_id' => $student->id,
-                        'video_id' => $video->id,
+                        'episode_id' => $episode->id,
                     ])->delete();
 
-                    DB::table('student_video_seen')->insert([
+                    DB::table('student_episode_seen')->insert([
                         'student_id' => $student->id,
-                        'video_id' => $video->id,
+                        'episode_id' => $episode->id,
                         'created_at' => $videoCompleted->created_at,
                     ]);
                 }
