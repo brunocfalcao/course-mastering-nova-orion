@@ -2,12 +2,12 @@
 
 namespace MasteringNovaOrion\Database\Seeders;
 
+use Eduka\Cube\Models\Backend;
 use Eduka\Cube\Models\Chapter;
 use Eduka\Cube\Models\Course;
 use Eduka\Cube\Models\Order;
-use Eduka\Cube\Models\Organization;
+use Eduka\Cube\Models\Student;
 use Eduka\Cube\Models\Subscriber;
-use Eduka\Cube\Models\User;
 use Eduka\Cube\Models\Variant;
 use Eduka\Cube\Models\Video;
 use Illuminate\Database\Seeder;
@@ -19,18 +19,18 @@ class MasteringNovaOrionCourseSeeder extends Seeder
 {
     public function run()
     {
-        if (! Organization::exists()) {
-            $organization = Organization::create([
+        if (! Backend::exists()) {
+            $backend = Backend::create([
                 'name' => 'brunofalcao.dev',
                 'domain' => env('EDUKA_BACKEND_URL'),
                 'provider_namespace' => '\Eduka\Dev\DevServiceProvider',
             ]);
         } else {
-            $organization = Organization::find(1);
+            $backend = Backend::find(1);
         }
 
         // Create admin user.
-        $admin = User::create([
+        $admin = Student::create([
             'name' => 'Bruno Falcao (OR)',
             'email' => env('MN_OR_EMAIL'),
             'password' => bcrypt('password'),
@@ -43,7 +43,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             'canonical' => 'course-mastering-nova-orion',
             'domain' => env('MN_OR_DOMAIN'),
             'provider_namespace' => 'MasteringNovaOrion\\MasteringNovaOrionServiceProvider',
-            'organization_id' => $organization->id,
+            'backend_id' => $backend->id,
 
             //'vimeo_folder_id' => env('MN_OR_COURSE_VIMEO_FOLDER_ID'),
             //'vimeo_uri' => env('MN_OR_COURSE_VIMEO_URI'),
@@ -97,15 +97,15 @@ class MasteringNovaOrionCourseSeeder extends Seeder
          * Add the users and then we can continue to connect to the remaining
          * video properties.
          */
-        foreach (clone $oldUsers->get() as $user) {
-            User::withoutEvents(function () use ($user) {
-                User::create([
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'password' => $user->password,
-                    'created_at' => $user->created_at,
-                    'updated_at' => $user->updated_at,
-                    'deleted_at' => $user->deleted_at,
+        foreach (clone $oldUsers->get() as $student) {
+            Student::withoutEvents(function () use ($student) {
+                Student::create([
+                    'name' => $student->name,
+                    'email' => $student->email,
+                    'password' => $student->password,
+                    'created_at' => $student->created_at,
+                    'updated_at' => $student->updated_at,
+                    'deleted_at' => $student->deleted_at,
                 ]);
             });
         }
@@ -371,18 +371,18 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             */
 
             foreach (clone $oldVideosCompleted->get() as $videoCompleted) {
-                $user = User::firstWhere('id', $videoCompleted->user_id);
+                $student = Student::firstWhere('id', $videoCompleted->user_id);
                 $video = Video::firstWhere('old_id', $videoCompleted->video_id);
 
-                if ($video && $user) {
+                if ($video && $student) {
                     // Delete other lines
-                    DB::table('user_video_seen')->where([
-                        'user_id' => $user->id,
+                    DB::table('student_video_seen')->where([
+                        'student_id' => $student->id,
                         'video_id' => $video->id,
                     ])->delete();
 
-                    DB::table('user_video_seen')->insert([
-                        'user_id' => $user->id,
+                    DB::table('student_video_seen')->insert([
+                        'student_id' => $student->id,
                         'video_id' => $video->id,
                         'created_at' => $videoCompleted->created_at,
                     ]);
@@ -395,21 +395,21 @@ class MasteringNovaOrionCourseSeeder extends Seeder
         foreach (clone $oldPaddleLog->get() as $paddleLog) {
             Order::withoutEvents(function () use ($paddleLog, $variant) {
 
-                $user = User::firstWhere('email', $paddleLog->email);
+                $student = Student::firstWhere('email', $paddleLog->email);
 
-                if ($user) {
+                if ($student) {
                     Order::create([
                         'provider' => 'paddle',
                         'variant_id' => $variant->id,
                         'course_id' => $variant->course->id,
                         'store_id' => $variant->course->lemon_squeezy_store_id,
-                        'user_id' => $user->id,
+                        'student_id' => $student->id,
                         'country' => $paddleLog->country,
                         'response_body' => (array) $paddleLog,
                         'custom_data' => $paddleLog->passthrough,
                         'event_name' => $paddleLog->alert_name,
-                        'user_name' => $paddleLog->customer_name,
-                        'user_email' => $paddleLog->email,
+                        'student_name' => $paddleLog->customer_name,
+                        'student_email' => $paddleLog->email,
                         'total_usd' => $paddleLog->sale_gross,
                         'price' => $paddleLog->sale_gross,
                         'order_id' => $paddleLog->order_id,
@@ -419,11 +419,11 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                         'updated_at' => $paddleLog->created_at,
                     ]);
 
-                    // Attach user to Orion course.
-                    $user->courses()->attach($variant->course);
+                    // Attach student to Orion course.
+                    $student->courses()->attach($variant->course);
 
-                    // Attach user to course variant.
-                    $user->variants()->attach($variant);
+                    // Attach student to course variant.
+                    $student->variants()->attach($variant);
                 }
             });
         }

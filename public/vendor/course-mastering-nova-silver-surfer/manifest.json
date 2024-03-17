@@ -1,120 +1,120 @@
 {
   "resources/assets/favicons/android-chrome-192x192.png": {
-    "file": "assets/android-chrome-192x192-df6b6887.png",
+    "file": "assets/android-chrome-192x192-DM_ot9SB.png",
     "src": "resources/assets/favicons/android-chrome-192x192.png"
   },
   "resources/assets/favicons/android-chrome-512x512.png": {
-    "file": "assets/android-chrome-512x512-0798e948.png",
+    "file": "assets/android-chrome-512x512-BprTUnp5.png",
     "src": "resources/assets/favicons/android-chrome-512x512.png"
   },
   "resources/assets/favicons/apple-touch-icon.png": {
-    "file": "assets/apple-touch-icon-d85c9f40.png",
+    "file": "assets/apple-touch-icon-DwB5cWRs.png",
     "src": "resources/assets/favicons/apple-touch-icon.png"
   },
   "resources/assets/favicons/favicon-16x16.png": {
-    "file": "assets/favicon-16x16-09a72e8d.png",
+    "file": "assets/favicon-16x16-DxZR4b5D.png",
     "src": "resources/assets/favicons/favicon-16x16.png"
   },
   "resources/assets/favicons/favicon-32x32.png": {
-    "file": "assets/favicon-32x32-4fd12b2a.png",
+    "file": "assets/favicon-32x32-CTvJCPg3.png",
     "src": "resources/assets/favicons/favicon-32x32.png"
   },
   "resources/assets/favicons/favicon.ico": {
-    "file": "assets/favicon-5195fbfa.ico",
+    "file": "assets/favicon-DKy0shyZ.ico",
     "src": "resources/assets/favicons/favicon.ico"
   },
   "resources/assets/favicons/mstile-150x150.png": {
-    "file": "assets/mstile-150x150-169763b2.png",
+    "file": "assets/mstile-150x150-BiIMb8gU.png",
     "src": "resources/assets/favicons/mstile-150x150.png"
   },
   "resources/assets/favicons/safari-pinned-tab.svg": {
-    "file": "assets/safari-pinned-tab-51d28c70.svg",
+    "file": "assets/safari-pinned-tab-DPvo-IsB.svg",
     "src": "resources/assets/favicons/safari-pinned-tab.svg"
   },
-  "resources/assets/images/March 2023.svg": {
-    "file": "assets/March 2023-617e0a76.svg",
-    "src": "resources/assets/images/March 2023.svg"
-  },
   "resources/assets/images/background-desktop.jpg": {
-    "file": "assets/background-desktop-d222f32f.jpg",
+    "file": "assets/background-desktop-B0Kh2adv.jpg",
     "src": "resources/assets/images/background-desktop.jpg"
   },
   "resources/assets/images/background-full.png": {
-    "file": "assets/background-full-d3b49bca.png",
+    "file": "assets/background-full-CdF23xCw.png",
     "src": "resources/assets/images/background-full.png"
   },
   "resources/assets/images/background-hybrid.jpg": {
-    "file": "assets/background-hybrid-7cb5fbca.jpg",
+    "file": "assets/background-hybrid-B0yCrpdX.jpg",
     "src": "resources/assets/images/background-hybrid.jpg"
   },
   "resources/assets/images/background-mobile.jpg": {
-    "file": "assets/background-mobile-ad5e7d38.jpg",
+    "file": "assets/background-mobile-DV1C16BZ.jpg",
     "src": "resources/assets/images/background-mobile.jpg"
   },
   "resources/assets/images/background.png": {
-    "file": "assets/background-5360a9f2.png",
+    "file": "assets/background-DZS4aAi-.png",
     "src": "resources/assets/images/background.png"
   },
+  "resources/assets/images/launch-date.svg": {
+    "file": "assets/launch-date-Cov-okIJ.svg",
+    "src": "resources/assets/images/launch-date.svg"
+  },
   "resources/assets/images/logo-wide-large.png": {
-    "file": "assets/logo-wide-large-c911132b.png",
+    "file": "assets/logo-wide-large-B1v9cRnd.png",
     "src": "resources/assets/images/logo-wide-large.png"
   },
   "resources/assets/images/logo-wide.png": {
-    "file": "assets/logo-wide-14f8489b.png",
+    "file": "assets/logo-wide-Dy89tn6z.png",
     "src": "resources/assets/images/logo-wide.png"
   },
   "resources/assets/images/logo.png": {
-    "file": "assets/logo-4f810e53.png",
+    "file": "assets/logo-o5elxCwf.png",
     "src": "resources/assets/images/logo.png"
   },
   "resources/assets/images/progress/progress-25-resized.png": {
-    "file": "assets/progress-25-resized-ccec1b9f.png",
+    "file": "assets/progress-25-resized-CqYxpFA_.png",
     "src": "resources/assets/images/progress/progress-25-resized.png"
   },
   "resources/assets/images/progress/progress-25.png": {
-    "file": "assets/progress-25-a736262e.png",
+    "file": "assets/progress-25-CRebr0xq.png",
     "src": "resources/assets/images/progress/progress-25.png"
   },
   "resources/assets/images/progress/progress-50-resized.png": {
-    "file": "assets/progress-50-resized-83532cd1.png",
+    "file": "assets/progress-50-resized-BHe42eZv.png",
     "src": "resources/assets/images/progress/progress-50-resized.png"
   },
   "resources/assets/images/progress/progress-50.png": {
-    "file": "assets/progress-50-6ddd05c9.png",
+    "file": "assets/progress-50-__X3vGt5.png",
     "src": "resources/assets/images/progress/progress-50.png"
   },
   "resources/assets/images/progress/progress-75-resized.png": {
-    "file": "assets/progress-75-resized-7223d99c.png",
+    "file": "assets/progress-75-resized-Dir4Dt-N.png",
     "src": "resources/assets/images/progress/progress-75-resized.png"
   },
   "resources/assets/images/progress/progress-75.png": {
-    "file": "assets/progress-75-84cd1260.png",
+    "file": "assets/progress-75-BMub-453.png",
     "src": "resources/assets/images/progress/progress-75.png"
   },
   "resources/assets/images/progress/progress-99-resized.png": {
-    "file": "assets/progress-99-resized-884ff066.png",
+    "file": "assets/progress-99-resized-xxg-Cydk.png",
     "src": "resources/assets/images/progress/progress-99-resized.png"
   },
   "resources/assets/images/progress/progress-99.png": {
-    "file": "assets/progress-99-94d7cbcb.png",
+    "file": "assets/progress-99-DKfrOwKC.png",
     "src": "resources/assets/images/progress/progress-99.png"
   },
   "resources/assets/images/showcase-cropped.jpg": {
-    "file": "assets/showcase-cropped-c53e7d56.jpg",
+    "file": "assets/showcase-cropped-dWmoxqxW.jpg",
     "src": "resources/assets/images/showcase-cropped.jpg"
   },
   "resources/assets/images/showcase.png": {
-    "file": "assets/showcase-92096ed4.png",
+    "file": "assets/showcase-DuVuE9H8.png",
     "src": "resources/assets/images/showcase.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-00127171.css",
-    "isEntry": true,
-    "src": "resources/css/app.css"
+    "file": "assets/app-EjeOWnwh.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-d3108b64.js",
-    "isEntry": true,
-    "src": "resources/js/app.js"
+    "file": "assets/app-15BIPaTr.js",
+    "src": "resources/js/app.js",
+    "isEntry": true
   }
 }
