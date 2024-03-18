@@ -54,9 +54,6 @@ class MasteringNovaOrionCourseSeeder extends Seeder
 
             'prelaunched_at' => now()->subDays(30),
             'launched_at' => now()->subDays(15),
-
-            'admin_email' => env('MN_OR_EMAIL'),
-            'admin_name' => 'Bruno Falcao (OR)',
         ]);
 
         $course->update([
