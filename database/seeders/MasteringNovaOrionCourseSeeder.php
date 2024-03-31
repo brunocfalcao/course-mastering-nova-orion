@@ -13,7 +13,6 @@ use Eduka\Cube\Models\Variant;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class MasteringNovaOrionCourseSeeder extends Seeder
 {
@@ -44,13 +43,14 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             'domain' => env('MN_OR_DOMAIN'),
             'provider_namespace' => 'MasteringNovaOrion\\MasteringNovaOrionServiceProvider',
             'backend_id' => $backend->id,
+            'student_admin_id' => $admin->id,
 
             //'vimeo_folder_id' => env('MN_OR_COURSE_VIMEO_FOLDER_ID'),
             //'vimeo_uri' => env('MN_OR_COURSE_VIMEO_URI'),
 
             'lemon_squeezy_store_id' => env('LEMON_SQUEEZY_STORE_ID'),
             'lemon_squeezy_api_key' => env('LEMON_SQUEEZY_API_KEY'),
-            'lemon_squeezy_hash_key' => env('LEMON_SQUEEZY_HASH_KEY'),
+            'lemon_squeezy_hash' => env('LEMON_SQUEEZY_HASH_KEY'),
 
             'prelaunched_at' => now()->subDays(30),
             'launched_at' => now()->subDays(15),
@@ -82,7 +82,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
         $oldSubscribers = DB::connection('mysql-orion')->table('subscribers');
 
         //Migrated.
-        $oldUsers = DB::connection('mysql-orion')->table('users');
+        $oldStudents = DB::connection('mysql-orion')->table('users');
 
         // Migrated.
         $oldEpisodes = DB::connection('mysql-orion')->table('videos');
@@ -94,7 +94,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
          * Add the users and then we can continue to connect to the remaining
          * episode properties.
          */
-        foreach (clone $oldUsers->get() as $student) {
+        foreach (clone $oldStudents->get() as $student) {
             Student::withoutEvents(function () use ($student) {
                 Student::create([
                     'name' => $student->name,
@@ -102,7 +102,6 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                     'password' => $student->password,
                     'created_at' => $student->created_at,
                     'updated_at' => $student->updated_at,
-                    'deleted_at' => $student->deleted_at,
                 ]);
             });
         }
@@ -110,20 +109,24 @@ class MasteringNovaOrionCourseSeeder extends Seeder
         // Additionally add giveaway emails as subscribers, without sending emails.
         foreach (clone $oldGiveawayEmails->get() as $participant) {
             Subscriber::withoutEvents(function () use ($participant, $course) {
-                Subscriber::create([
-                    'email' => $participant->email,
-                    'course_id' => $course->id,
-                ]);
+                if (! Subscriber::where('email', $participant->email)->exists()) {
+                    Subscriber::create([
+                        'email' => $participant->email,
+                        'course_id' => $course->id,
+                    ]);
+                }
             });
         }
 
         // Add subscribers without calling events (no nobody receives emails).
         foreach (clone $oldSubscribers->get() as $subscriber) {
             Subscriber::withoutEvents(function () use ($subscriber, $course) {
-                Subscriber::create([
-                    'email' => $subscriber->email,
-                    'course_id' => $course->id,
-                ]);
+                if (! Subscriber::where('email', $subscriber->email)->exists()) {
+                    Subscriber::create([
+                        'email' => $subscriber->email,
+                        'course_id' => $course->id,
+                    ]);
+                }
             });
         }
 
@@ -314,12 +317,9 @@ class MasteringNovaOrionCourseSeeder extends Seeder
 <meta property="og:image" content="https://tailwindui.com/img/og-default.png" inertia>
 <meta property="description" content="Beautiful UI components and templates by the creators of Tailwind CSS." inertia>
                  */
-                $uuid = (string) Str::uuid();
-
                 $newEpisode = Episode::create([
                     'old_id' => $oldEpisode->id,
                     'name' => $oldEpisode->title,
-                    'uuid' => $uuid,
                     'description' => $oldEpisode->details,
                     'chapter_id' => $newChapter->id,
                     'course_id' => $course->id,
@@ -327,6 +327,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                     'is_visible' => $oldEpisode->is_visible,
                     'is_active' => $oldEpisode->is_active,
                     'is_free' => $oldEpisode->is_free,
+                    'vimeo_uri' => '/videos/'.$oldEpisode->vimeo_id,
                 ]);
 
                 // Attach episode image for SEO.
@@ -373,12 +374,12 @@ class MasteringNovaOrionCourseSeeder extends Seeder
 
                 if ($episode && $student) {
                     // Delete other lines
-                    DB::table('student_episode_seen')->where([
+                    DB::table('episode_student_seen')->where([
                         'student_id' => $student->id,
                         'episode_id' => $episode->id,
                     ])->delete();
 
-                    DB::table('student_episode_seen')->insert([
+                    DB::table('episode_student_seen')->insert([
                         'student_id' => $student->id,
                         'episode_id' => $episode->id,
                         'created_at' => $videoCompleted->created_at,
