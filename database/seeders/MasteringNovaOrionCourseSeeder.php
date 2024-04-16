@@ -107,6 +107,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
         }
 
         // Additionally add giveaway emails as subscribers, without sending emails.
+        /*
         foreach (clone $oldGiveawayEmails->get() as $participant) {
             Subscriber::withoutEvents(function () use ($participant, $course) {
                 if (! Subscriber::where('email', $participant->email)->exists()) {
@@ -117,8 +118,10 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                 }
             });
         }
+        */
 
         // Add subscribers without calling events (no nobody receives emails).
+        /*
         foreach (clone $oldSubscribers->get() as $subscriber) {
             Subscriber::withoutEvents(function () use ($subscriber, $course) {
                 if (! Subscriber::where('email', $subscriber->email)->exists()) {
@@ -129,6 +132,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                 }
             });
         }
+        */
 
         // Image mappings (key=id)
         $oldChapterFilenames = [
