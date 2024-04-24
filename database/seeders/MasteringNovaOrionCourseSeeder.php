@@ -48,6 +48,8 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             //'vimeo_folder_id' => env('MN_OR_COURSE_VIMEO_FOLDER_ID'),
             //'vimeo_uri' => env('MN_OR_COURSE_VIMEO_URI'),
 
+            'clarity_code' => env('MN_OR_CLARITY_CODE'),
+
             'lemon_squeezy_store_id' => env('LEMON_SQUEEZY_STORE_ID'),
             'lemon_squeezy_api_key' => env('LEMON_SQUEEZY_API_KEY'),
             'lemon_squeezy_hash' => env('LEMON_SQUEEZY_HASH_KEY'),
@@ -57,7 +59,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
         ]);
 
         $course->update([
-            'filename' => Storage::disk('public')
+            'filename_logo' => Storage::disk('public')
                 ->putFile(__DIR__.
                           '/../assets/social-card.jpg')]);
 
