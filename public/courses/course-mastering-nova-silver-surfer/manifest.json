@@ -107,8 +107,12 @@
     "file": "assets/showcase-DuVuE9H8.png",
     "src": "resources/assets/images/showcase.png"
   },
+  "resources/assets/images/twitter.jpg": {
+    "file": "assets/twitter-DYVAA5Yv.jpg",
+    "src": "resources/assets/images/twitter.jpg"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-HoGg5GPw.css",
+    "file": "assets/app-D5q4zz9b.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
