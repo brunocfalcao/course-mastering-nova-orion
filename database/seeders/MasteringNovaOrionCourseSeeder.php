@@ -59,7 +59,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
         ]);
 
         $course->update([
-            'filename_logo' => Storage::disk('public')
+            'filename_email_logo' => Storage::disk('public')
                 ->putFile(__DIR__.
                           '/../assets/social-card.jpg')]);
 
