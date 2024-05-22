@@ -18,37 +18,22 @@ class MasteringNovaOrionCourseSeeder extends Seeder
 {
     public function run()
     {
-        if (! Backend::exists()) {
-            $backend = Backend::create([
-                'name' => 'brunofalcao.dev',
-                'domain' => env('EDUKA_BACKEND_URL'),
-                'provider_namespace' => '\Eduka\Dev\DevServiceProvider',
-            ]);
-        } else {
-            $backend = Backend::find(1);
-        }
-
-        // Create admin user.
-        $admin = Student::create([
-            'name' => 'Bruno Falcao (OR)',
-            'email' => env('MN_OR_EMAIL'),
-            'password' => bcrypt('password'),
-        ]);
+        $backend = Backend::firstWhere('name', 'brunofalcao.dev');
 
         // Create course.
         $course = Course::create([
-            'name' => 'Mastering Nova - Orion ('.env('MN_OR_DOMAIN').')',
+            'name' => 'Mastering Nova - Orion ('.env('MNOR_DOMAIN').')',
             'description' => 'Course to learn Laravel Nova - Orion version',
             'canonical' => 'course-mastering-nova-orion',
-            'domain' => env('MN_OR_DOMAIN'),
+            'domain' => env('MNOR_DOMAIN'),
             'provider_namespace' => 'MasteringNovaOrion\\MasteringNovaOrionServiceProvider',
             'backend_id' => $backend->id,
-            'student_admin_id' => $admin->id,
+            //'student_admin_id' => $admin->id,
 
-            //'vimeo_folder_id' => env('MN_OR_COURSE_VIMEO_FOLDER_ID'),
-            //'vimeo_uri' => env('MN_OR_COURSE_VIMEO_URI'),
+            //'vimeo_folder_id' => env('MNOR_COURSE_VIMEO_FOLDER_ID'),
+            //'vimeo_uri' => env('MNOR_COURSE_VIMEO_URI'),
 
-            'clarity_code' => env('MN_OR_CLARITY_CODE'),
+            'clarity_code' => env('MNOR_CLARITY_CODE'),
 
             'lemon_squeezy_store_id' => env('LEMON_SQUEEZY_STORE_ID'),
             'lemon_squeezy_api_key' => env('LEMON_SQUEEZY_API_KEY'),
@@ -67,30 +52,41 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             'name' => 'Full course',
             'description' => 'Full course from the past',
             'course_id' => $course->id,
-            'lemon_squeezy_variant_id' => env('MN_OR_VARIANT_ID'),
-            'lemon_squeezy_price_override' => env('MN_OR_PRICE_OVERRIDE'),
+            'lemon_squeezy_variant_id' => env('MNOR_VARIANT_ID'),
+            'lemon_squeezy_price_override' => env('MNOR_PRICE_OVERRIDE'),
         ]);
 
-        // Migrated.
-        $oldChapters = DB::connection('mysql-orion')->table('chapters');
+        // Create and attach the admin email to the course admin.
+        $student = Student::create([
+            'name' => env('MNOR_STUDENT_NAME'),
+            'email' => env('MNOR_STUDENT_EMAIL'),
+            'password' => bcrypt(env('MNOR_STUDENT_PASSWORD')),
+        ]);
+
+        $student->asCourseAdmin()->save($course);
+
+        return;
 
         // Migrated.
-        $oldGiveawayEmails = DB::connection('mysql-orion')->table('giveaway');
+        $oldChapters = DB::connection('eduka-orion')->table('chapters');
 
         // Migrated.
-        $oldPaddleLog = DB::connection('mysql-orion')->table('paddle_log');
+        $oldGiveawayEmails = DB::connection('eduka-orion')->table('giveaway');
 
         // Migrated.
-        $oldSubscribers = DB::connection('mysql-orion')->table('subscribers');
+        $oldPaddleLog = DB::connection('eduka-orion')->table('paddle_log');
+
+        // Migrated.
+        $oldSubscribers = DB::connection('eduka-orion')->table('subscribers');
 
         //Migrated.
-        $oldStudents = DB::connection('mysql-orion')->table('users');
+        $oldStudents = DB::connection('eduka-orion')->table('users');
 
         // Migrated.
-        $oldEpisodes = DB::connection('mysql-orion')->table('videos');
+        $oldEpisodes = DB::connection('eduka-orion')->table('videos');
 
         // Migrated.
-        $oldVideosCompleted = DB::connection('mysql-orion')->table('videos_completed');
+        $oldVideosCompleted = DB::connection('eduka-orion')->table('videos_completed');
 
         /**
          * Add the users and then we can continue to connect to the remaining
@@ -101,7 +97,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                 Student::create([
                     'name' => $student->name,
                     'email' => $student->email,
-                    'password' => $student->password,
+                    'password' => app()->environment() == 'local' ? bcrypt('password') : $student->password,
                     'created_at' => $student->created_at,
                     'updated_at' => $student->updated_at,
                 ]);
@@ -235,7 +231,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             $episodes = $episodesQueryBuilder->where('chapter_id', $oldChapter->id)->get();
 
             // Add image for SEO.
-            if (env('MN_OR_IMPORT_ASSETS') === true) {
+            if (env('MNOR_IMPORT_ASSETS') === true) {
                 if (array_key_exists($oldChapter->id, $oldChapterFilenames)) {
                     $newChapter->update([
                         'filename' => Storage::disk('public')
@@ -337,7 +333,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                 ]);
 
                 // Attach episode image for SEO.
-                if (env('MN_OR_IMPORT_ASSETS') === true) {
+                if (env('MNOR_IMPORT_ASSETS') === true) {
                     if (array_key_exists($oldEpisode->id, $oldEpisodeFilenames)) {
                         $newEpisode->update([
                             'filename' => Storage::disk('public')
@@ -354,19 +350,19 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                 if ($episode->old_id) {
                     $episode->update([
                         'meta_names' => [
-                            'twitter:site' => env('MN_OR_DOMAIN').'/episode/'.$episode->uuid,
+                            'twitter:site' => env('MNOR_DOMAIN').'/episode/'.$episode->uuid,
                             'twitter:title' => $episode->name,
                             'twitter:description' => $descriptions[$episode->old_id],
-                            'twitter:image' => env('MN_OR_DOMAIN').'/storage/'.$episode->filename,
-                            'twitter:creator' => '@'.env('MN_OR_TWITTER'),
+                            'twitter:image' => env('MNOR_DOMAIN').'/storage/'.$episode->filename,
+                            'twitter:creator' => '@'.env('MNOR_TWITTER'),
                         ],
 
                         'meta_properties' => [
-                            'og:url' => env('MN_OR_DOMAIN'),
+                            'og:url' => env('MNOR_DOMAIN'),
                             'og:type' => 'article',
                             'og:title' => $episode->name,
                             'og:description' => $descriptions[$episode->old_id],
-                            'og:image' => env('MN_OR_DOMAIN').'/storage/'.$episode->filename,
+                            'og:image' => env('MNOR_DOMAIN').'/storage/'.$episode->filename,
                             'description' => $descriptions[$episode->old_id],
                         ],
                     ]);
