@@ -33,7 +33,15 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             //'vimeo_folder_id' => env('MNOR_COURSE_VIMEO_FOLDER_ID'),
             //'vimeo_uri' => env('MNOR_COURSE_VIMEO_URI'),
 
-            'clarity_code' => env('MNOR_CLARITY_CODE'),
+            'progress' => 25,
+
+            'theme' => [
+                'primary-color' => '#1338BE',
+                'secondary-color' => '#10414a',
+                'danger-color' => '#23dafc',
+            ],
+
+            'clarity_code' => null,
 
             'lemon_squeezy_store_id' => env('LEMON_SQUEEZY_STORE_ID'),
             'lemon_squeezy_api_key' => env('LEMON_SQUEEZY_API_KEY'),
