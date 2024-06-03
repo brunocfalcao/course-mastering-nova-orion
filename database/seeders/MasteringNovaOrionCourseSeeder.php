@@ -52,10 +52,10 @@ class MasteringNovaOrionCourseSeeder extends Seeder
         ]);
 
         // Add the 'course' filesystem disk.
-        push_eduka_filesystem_disk($course);
+        push_canonical_filesystem_disk($course->canonical);
 
         // Add twitter and logo images and update course.
-        $email = Storage::disk('eduka')
+        $email = Storage::disk($course->canonical)
             ->putFile(__DIR__.
                       '/../assets/email-logo.jpg');
 
