@@ -18,7 +18,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
 {
     public function run()
     {
-        $backend = Backend::firstWhere('name', 'brunofalcao.dev');
+        $backend = Backend::firstWhere('domain', env('BDEV_DOMAIN'));
 
         // Create course.
         $course = Course::create([
