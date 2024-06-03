@@ -51,6 +51,9 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             'launched_at' => now()->subDays(15),
         ]);
 
+        // Add the 'course' filesystem disk.
+        push_eduka_filesystem_disk($course);
+
         // Add twitter and logo images and update course.
         $email = Storage::disk('eduka')
             ->putFile(__DIR__.
