@@ -51,10 +51,14 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             'launched_at' => now()->subDays(15),
         ]);
 
+        // Add twitter and logo images and update course.
+        $email = Storage::disk('eduka')
+            ->putFile(__DIR__.
+                      '/../assets/email-logo.jpg');
+
         $course->update([
-            'filename_email_logo' => Storage::disk('eduka')
-                ->putFile(__DIR__.
-                          '/../assets/social-card.jpg')]);
+            'filename_email_logo' => $email,
+        ]);
 
         $variant = Variant::create([
             'name' => 'Full course',
