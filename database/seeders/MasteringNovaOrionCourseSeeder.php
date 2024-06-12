@@ -28,10 +28,7 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             'domain' => env('MNOR_DOMAIN'),
             'provider_namespace' => 'MasteringNovaOrion\\MasteringNovaOrionServiceProvider',
             'backend_id' => $backend->id,
-            //'student_admin_id' => $admin->id,
-
-            //'vimeo_folder_id' => env('MNOR_COURSE_VIMEO_FOLDER_ID'),
-            //'vimeo_uri' => env('MNOR_COURSE_VIMEO_URI'),
+            'clarity_code' => env('MNOR_CLARITY_CODE'),
 
             'progress' => 25,
 
