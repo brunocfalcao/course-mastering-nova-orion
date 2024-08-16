@@ -26,7 +26,8 @@ class MasteringNovaOrionCourseSeeder extends Seeder
             'description' => 'Course to learn Laravel Nova - Orion version',
             'canonical' => 'course-mastering-nova-orion',
             'domain' => env('MNOR_DOMAIN'),
-            'provider_namespace' => 'MasteringNovaOrion\\MasteringNovaOrionServiceProvider',
+            'payments_gateway_class' => 'Eduka\Payments\PaymentProviders\Paddle\Paddle',
+            'service_provider_class' => 'MasteringNovaOrion\\MasteringNovaOrionServiceProvider',
             'backend_id' => $backend->id,
             'clarity_code' => env('MNOR_CLARITY_CODE'),
 
@@ -57,15 +58,15 @@ class MasteringNovaOrionCourseSeeder extends Seeder
                       '/../assets/email-logo.jpg');
 
         $course->update([
-            'filename_email_logo' => $email,
+            'filename_logo' => $email,
         ]);
 
         $variant = Variant::create([
             'name' => 'Full course',
             'description' => 'Full course from the past',
             'course_id' => $course->id,
-            'lemon_squeezy_variant_id' => env('MNOR_VARIANT_ID'),
-            'lemon_squeezy_price_override' => env('MNOR_PRICE_OVERRIDE'),
+            'product_id' => env('MNOR_VARIANT_ID'),
+            'price_override' => env('MNOR_PRICE_OVERRIDE'),
         ]);
 
         // Create and attach the admin email to the course admin.
