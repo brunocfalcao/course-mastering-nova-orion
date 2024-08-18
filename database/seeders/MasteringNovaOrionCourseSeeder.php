@@ -52,15 +52,6 @@ class MasteringNovaOrionCourseSeeder extends Seeder
         // Add the 'course' filesystem disk.
         push_canonical_filesystem_disk($course->canonical);
 
-        // Add twitter and logo images and update course.
-        $email = Storage::disk($course->canonical)
-            ->putFile(__DIR__.
-                      '/../assets/email-logo.jpg');
-
-        $course->update([
-            'filename_logo' => $email,
-        ]);
-
         $variant = Variant::create([
             'name' => 'Full course',
             'description' => 'Full course from the past',
